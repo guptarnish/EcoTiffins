@@ -8,6 +8,8 @@ import android.os.Vibrator;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
+import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
@@ -29,8 +31,8 @@ import es.hol.ecotiffins.ecotiffins.util.SharedPreferencesUtilities;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, WebServiceListener {
 
     private ViewFlipper viewFlipper;
-    private AppCompatEditText editLicenseNum;
-    private AppCompatEditText editPinTypeNum;
+    private AppCompatEditText editEmail;
+    private AppCompatEditText editPassword;
 
     private WebServiceHandler webServiceHandler;
     private GeneralUtilities generalUtilities;
@@ -52,8 +54,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         logInIfUserExist();
 
         viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
-        editLicenseNum = (AppCompatEditText) findViewById(R.id.editEmail);
-        editPinTypeNum = (AppCompatEditText) findViewById(R.id.editPassword);
+        editEmail = (AppCompatEditText) findViewById(R.id.editEmail);
+        editPassword = (AppCompatEditText) findViewById(R.id.editPassword);
 
         setOnClickListeners();
     }
@@ -70,27 +72,34 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnNext :
+            case R.id.btnNext:
                 //Validating user to fill the required field & entered number should be in four digits
                 //If user satisfies the conditions, we will register the license number
                 //Otherwise set error to TextInputLayout
-                if (!editLicenseNum.getText().toString().matches ("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")) {
+                if (Patterns.EMAIL_ADDRESS.matcher(editEmail.getText().toString().trim()).matches()) {
                     //Setting up animation to view flipper and moving to the next state
                     viewFlipper.setInAnimation(LoginActivity.this, R.anim.slide_in_from_right);
                     viewFlipper.setOutAnimation(LoginActivity.this, R.anim.slide_out_to_left);
                     viewFlipper.showNext();
-                    ((TextView) findViewById(R.id.txtEmailAddress)).setText(editLicenseNum.getText().toString());
+                    ((TextView) findViewById(R.id.txtEmailAddress)).setText(editEmail.getText().toString());
                 } else {
                     setValidationError(findViewById(R.id.txtInputLayoutEmail), getResources().getString(R.string.error_email));
                 }
                 break;
 
-            case R.id.btnLogin :
-                startActivity(new Intent(this, MainActivity.class));
-                this.finish();
+            case R.id.btnLogin:
+                if (editPassword.getText().toString().trim().equals("")) {
+                    setValidationError(findViewById(R.id.txtInputLayoutPassword), getResources().getString(R.string.error_password));
+                } else if (editPassword.getText().toString().trim().length() < 6) {
+                    setValidationError(findViewById(R.id.txtInputLayoutPassword), getResources().getString(R.string.error_password_min_lenth));
+                } else {
+                    loginUser();
+                    /*startActivity(new Intent(this, MainActivity.class));
+                    this.finish();*/
+                }
                 //logInIfUserExist();
                 break;
-            case R.id.imgBack :
+            case R.id.imgBack:
                 //Setting up animation to view flipper
                 viewFlipper.setInAnimation(LoginActivity.this, R.anim.slide_in_from_left);
                 viewFlipper.setOutAnimation(LoginActivity.this, R.anim.slide_out_to_right);
@@ -105,14 +114,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      * Device Id (IMEI) and GCM Id. After collecting the sufficient information, I've already prepared an instance of WebServiceHandler
      * and its listener which listen when Http Request brings results from the server
      */
-    private void registerLicenseNumber() {
+    private void loginUser() {
         //Preparing form fields for Http Post Request Body
         HashMap<String, String> formData = new HashMap<>();
-        formData.put("RegistrationNo", editLicenseNum.getText().toString());
-        formData.put("DeviceGcmId", "asd123");
+        formData.put("email", editEmail.getText().toString().trim());
+        formData.put("password", editPassword.getText().toString().trim());
         //Checking internet connectivity and then requesting to the server
         if (generalUtilities.isConnected()) {
-            webServiceHandler.requestToServer(getResources().getString(R.string.api_end_point), WebService.LOGIN, formData, true);
+            webServiceHandler.requestToServer((getResources().getString(R.string.api_end_point)) + "login.php", WebService.LOGIN, formData, true);
+        }else {
+            generalUtilities.showAlertDialog("Error", getResources().getString(R.string.internet_error), "OK");
         }
 
     }
@@ -120,12 +131,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     /**
      * Method is useful to apply error message on TextInputLayouts
-     * @param view on which error will be shown e.g findViewById(R.id.textInputLayout)
+     *
+     * @param view         on which error will be shown e.g findViewById(R.id.textInputLayout)
      * @param errorMessage what you want to display
      */
     private void setValidationError(View view, String errorMessage) {
         //Vibrate device on error
-        ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(100);
+        ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(50);
         //Here I am handling typecasting so that there is no need to cast before method is called
         TextInputLayout textInputLayout = (TextInputLayout) view;
         textInputLayout.setErrorEnabled(true);
@@ -133,29 +145,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onRequestCompleted(final String response, int api) {
-        if (api == WebService.LOGIN) {
-            try {
-                JSONObject jsonObject = new JSONObject(response);
-                if (jsonObject.getString("status").equals("1")) {
-                    sharedPreferencesUtilities.setUser("New User");
-                    runOnUiThread(new Runnable() {
-                        @SuppressLint("SetTextI18n")
-                        @Override
-                        public void run() {
-                            //Setting up animation to view flipper and moving to the next state
-                            viewFlipper.setInAnimation(LoginActivity.this, R.anim.slide_in_from_right);
-                            viewFlipper.setOutAnimation(LoginActivity.this, R.anim.slide_out_to_left);
-                            viewFlipper.showNext();
-                            ((TextView) findViewById(R.id.txtEmailAddress)).setText(editLicenseNum.getText().toString());
-                        }
-                    });
-                } else {
-                    generalUtilities.showAlertDialog("Request Cancelled", new JSONObject(response).getString("message"), "OK");
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
+    public void onRequestCompleted(String response, int api) {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            if (jsonObject.getString("error").equals("false")) {
+                JSONObject jsonUserObject = jsonObject.getJSONObject("user");
+                sharedPreferencesUtilities.setUser(jsonUserObject.getString("name"));
+                sharedPreferencesUtilities.setEmail(jsonUserObject.getString("email"));
+                sharedPreferencesUtilities.setPhone(jsonUserObject.getString("contact"));
+                sharedPreferencesUtilities.setAddress(jsonUserObject.getString("address"));
+                logInIfUserExist();
+            } else {
+                generalUtilities.showAlertDialog("Request Cancelled", new JSONObject(response).getString("error_msg"), "OK");
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

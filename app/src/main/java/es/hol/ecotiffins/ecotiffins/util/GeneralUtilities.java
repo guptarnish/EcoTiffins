@@ -90,16 +90,21 @@ public class GeneralUtilities {
         return position;
     }
 
-    public void showAlertDialog(String title, String message, String buttonName) {
-        new AlertDialog.Builder(
-                context, R.style.AlertDialogCustom)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton(buttonName, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+    public void showAlertDialog(final String title, final String message, final String buttonName) {
+        ((Activity) context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new AlertDialog.Builder(
+                        context, R.style.AlertDialogCustom)
+                        .setTitle(title)
+                        .setMessage(message)
+                        .setPositiveButton(buttonName, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
 
-                    }
-                }).show();
+                            }
+                        }).show();
+            }
+        });
     }
 }

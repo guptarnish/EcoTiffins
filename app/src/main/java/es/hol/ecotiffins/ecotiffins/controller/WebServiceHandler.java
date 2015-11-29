@@ -61,7 +61,7 @@ public class WebServiceHandler {
      */
     private final int REQUEST_TIMEOUT = 20;
 
-    public WebServiceHandler(Context context){
+    public WebServiceHandler(Context context) {
         this.context = context;
         client.setConnectTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS);
         client.setReadTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS);
@@ -81,7 +81,6 @@ public class WebServiceHandler {
                 if (progress)
                     stopProgressBar();
                 e.printStackTrace();
-                Log.e("API_FAILURE", e.getMessage());
                 //Passing the data to the interface
                 webServiceListener.onRequestFailure(e, api);
             }
@@ -90,6 +89,7 @@ public class WebServiceHandler {
             public void onResponse(Response response) throws IOException {
                 if (progress)
                     stopProgressBar();
+
                 //Passing the data to the interface
                 webServiceListener.onRequestCompleted(response.body().string(), api);
             }
@@ -100,10 +100,11 @@ public class WebServiceHandler {
     /**
      * This method is responsible to make API call to the server
      * Results of the request will be available in WebServiceListener.onRequestCompleted()
+     *
      * @param url server address on which request is to be sent
      * @param api pass the constant of WebService,class
-     *            @see WebService
-     *            @see WebServiceListener
+     * @see WebService
+     * @see WebServiceListener
      */
     public void requestToServer(String url, final int api, HashMap<String, String> formData) {
         startProgressBar();
@@ -117,7 +118,6 @@ public class WebServiceHandler {
             public void onFailure(Request request, IOException e) {
                 stopProgressBar();
                 e.printStackTrace();
-                Log.e("API_FAILURE", e.getMessage());
                 //Passing the data to the interface
                 webServiceListener.onRequestFailure(e, api);
             }
@@ -135,10 +135,11 @@ public class WebServiceHandler {
     /**
      * Method will manage form data for all apis and prepare a RequestBody
      * which is needed to call the api
+     *
      * @param formData a HashMap that consist of all data to be send to the server
      * @return RequestBody with proper key-value configuration
      */
-    private RequestBody getRequestBody(HashMap<String,String> formData) {
+    private RequestBody getRequestBody(HashMap<String, String> formData) {
         //We can get a Set of all keys mapped in HashMap
         Set<String> keySet = formData.keySet();
         //We can't directly get the keys so I'm getting a List using this Set
@@ -179,7 +180,7 @@ public class WebServiceHandler {
      * runOnUiThread()
      */
     public void stopProgressBar() {
-        ((Activity)context).runOnUiThread(new Runnable() {
+        ((Activity) context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 popupWindow.dismiss();
@@ -189,6 +190,7 @@ public class WebServiceHandler {
 
     /**
      * Method will print Http Request body to the LogCat Error
+     *
      * @param request pass the request to print its body
      */
     private void printRequest(Request request) {

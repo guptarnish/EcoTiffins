@@ -2,6 +2,7 @@ package es.hol.ecotiffins.ecotiffins.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import java.util.NavigableMap;
 
@@ -14,8 +15,8 @@ import es.hol.ecotiffins.ecotiffins.R;
  * Date         :   9/27/2015
  * Purpose      :   To store an integer value in shared preferences
  * Description  :   Application will save edited images in file system (SD CARD),
- *                  So it is necessary to provide a unique identity to each image.
- *                  To fulfill this requirement, This class has been created.
+ * So it is necessary to provide a unique identity to each image.
+ * To fulfill this requirement, This class has been created.
  */
 
 public class SharedPreferencesUtilities {
@@ -33,7 +34,7 @@ public class SharedPreferencesUtilities {
     }
 
     public String getUser() {
-            return sharedpreferences.getString(USER, "");
+        return sharedpreferences.getString(USER, "");
     }
 
     public String getEmail() {
