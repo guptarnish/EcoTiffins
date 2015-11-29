@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">"Eco Tiffins"</string>
+    <string name="api_end_point">http://ecotiffins.hol.es/apis/</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!--Drawer menus-->
+    <string name="home">Home</string>
+    <string name="history">History</string>
+    <string name="about_us">About Us</string>
+    <string name="contact">Contact Information</string>
+    <string name="logout">Logout</string>
+    <string name="help_and_support">Help &amp; Support</string>
+
+    <!--Option Menus-->
+    <string name="action_settings">Settings</string>
+
+    <!--System Messages-->
+    <string name="error_email">Please provide a valid email address.</string>
+    <string name="request_failure">Failed to connect to the internet, Please try again</string>
+</resources>
