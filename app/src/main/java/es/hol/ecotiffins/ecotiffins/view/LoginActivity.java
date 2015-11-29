@@ -1,6 +1,5 @@
 package es.hol.ecotiffins.ecotiffins.view;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.os.Vibrator;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
@@ -33,6 +31,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ViewFlipper viewFlipper;
     private AppCompatEditText editEmail;
     private AppCompatEditText editPassword;
+    private TextView textRegister;
 
     private WebServiceHandler webServiceHandler;
     private GeneralUtilities generalUtilities;
@@ -56,6 +55,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
         editEmail = (AppCompatEditText) findViewById(R.id.editEmail);
         editPassword = (AppCompatEditText) findViewById(R.id.editPassword);
+        textRegister = (TextView) findViewById(R.id.txtRegister);
 
         setOnClickListeners();
     }
@@ -67,6 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.btnNext).setOnClickListener(this);
         findViewById(R.id.btnLogin).setOnClickListener(this);
         findViewById(R.id.imgBack).setOnClickListener(this);
+        findViewById(R.id.txtRegister).setOnClickListener(this);
     }
 
     @Override
@@ -105,6 +106,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 viewFlipper.setOutAnimation(LoginActivity.this, R.anim.slide_out_to_right);
                 viewFlipper.showPrevious();
                 break;
+
+            case R.id.txtRegister:
+                startActivity(new Intent(this, RegisterActivity.class));
         }
     }
 
@@ -122,10 +126,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //Checking internet connectivity and then requesting to the server
         if (generalUtilities.isConnected()) {
             webServiceHandler.requestToServer((getResources().getString(R.string.api_end_point)) + "login.php", WebService.LOGIN, formData, true);
-        }else {
+        } else {
             generalUtilities.showAlertDialog("Error", getResources().getString(R.string.internet_error), "OK");
         }
-
     }
 
 

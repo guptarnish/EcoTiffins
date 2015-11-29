@@ -16,9 +16,16 @@
     <string name="action_settings">Settings</string>
 
     <!--System Messages-->
-    <string name="error_email">Please provide a valid email address.</string>
-    <string name="error_password">Password should not be empty.</string>
+    <string name="error_email">Please provide a valid email address</string>
+    <string name="error_password">Password should not be empty</string>
     <string name="error_password_min_lenth">Password should be minimum 6 letter.</string>
     <string name="request_failure">Failed to connect to the internet, Please try again</string>
-    <string name="internet_error">Please connect to the internet, and give it an antoher shot.</string>
+    <string name="internet_error">Please connect to the internet, and give it an antoher shot</string>
+
+    <!--Registration Error Message-->
+    <string name="name_empty">Please enter your name.</string>
+    <string name="address_empty">Address should be minimum 10 digit</string>
+    <string name="contact_empty">Contact should be minimum 10 digit</string>
+    <string name="password_empty">Password should be minimum 6 digit</string>
+    <string name="password_not_confirm">Password should be similar</string>
 </resources>

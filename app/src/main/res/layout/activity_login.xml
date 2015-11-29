@@ -39,53 +39,53 @@
                     android:textColor="@android:color/white"
                     android:textSize="25sp" />
 
-                    <LinearLayout
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/txtInputLayoutEmail"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="4"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
 
-                        <android.support.design.widget.TextInputLayout
-                            android:id="@+id/txtInputLayoutEmail"
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/editEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="20dp"
-                            app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+                            android:hint="Email Address"
+                            android:inputType="textWebEmailAddress"
+                            android:maxLength="25"
+                            android:theme="@style/ColorAccentSupplier" />
+                    </android.support.design.widget.TextInputLayout>
 
-                            <android.support.v7.widget.AppCompatEditText
-                                android:id="@+id/editEmail"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Email Address"
-                                android:inputType="textWebEmailAddress"
-                                android:maxLength="25"
-                                android:theme="@style/ColorAccentSupplier" />
-                        </android.support.design.widget.TextInputLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp">
 
-                        <FrameLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/txtRegister"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp">
+                            android:layout_gravity="start"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="Create New Account"
+                            android:textSize="12sp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="start"
-                                android:paddingLeft="5dp"
-                                android:paddingRight="5dp"
-                                android:text="Forget Password"
-                                android:textSize="12sp"
-                                android:visibility="gone" />
+                        <Button
+                            android:id="@+id/btnNext"
+                            style="@style/Button"
+                            android:layout_gravity="end"
+                            android:text="NEXT" />
+                    </FrameLayout>
 
-                            <Button
-                                android:id="@+id/btnNext"
-                                style="@style/Button"
-                                android:layout_gravity="end"
-                                android:text="NEXT" />
-                        </FrameLayout>
-
-                    </LinearLayout>
+                </LinearLayout>
 
 
                 <FrameLayout
