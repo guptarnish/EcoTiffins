@@ -1,4 +1,4 @@
-package es.hol.ecotiffins.ecotiffins;
+package es.hol.ecotiffins.ecotiffins.util;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +12,8 @@ import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.view.Display;
 import android.view.View;
+
+import es.hol.ecotiffins.ecotiffins.R;
 
 
 /**

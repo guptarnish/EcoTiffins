@@ -1,4 +1,4 @@
-package es.hol.ecotiffins.ecotiffins;
+package es.hol.ecotiffins.ecotiffins.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -19,7 +19,14 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, WebServiceListener{
+import es.hol.ecotiffins.ecotiffins.R;
+import es.hol.ecotiffins.ecotiffins.controller.WebServiceHandler;
+import es.hol.ecotiffins.ecotiffins.controller.WebServiceListener;
+import es.hol.ecotiffins.ecotiffins.model.WebService;
+import es.hol.ecotiffins.ecotiffins.util.GeneralUtilities;
+import es.hol.ecotiffins.ecotiffins.util.SharedPreferencesUtilities;
+
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, WebServiceListener {
 
     private ViewFlipper viewFlipper;
     private AppCompatEditText editLicenseNum;

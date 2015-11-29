@@ -1,9 +1,11 @@
-package es.hol.ecotiffins.ecotiffins;
+package es.hol.ecotiffins.ecotiffins.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import java.util.NavigableMap;
+
+import es.hol.ecotiffins.ecotiffins.R;
 
 /**
  * Author       :   Mohsin Khan

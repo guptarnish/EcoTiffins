@@ -1,4 +1,4 @@
-package es.hol.ecotiffins.ecotiffins;
+package es.hol.ecotiffins.ecotiffins.model;
 
 public final class WebService {
     public static final int LOGIN = 1;

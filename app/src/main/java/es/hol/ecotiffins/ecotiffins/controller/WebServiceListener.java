@@ -1,6 +1,8 @@
-package es.hol.ecotiffins.ecotiffins;
+package es.hol.ecotiffins.ecotiffins.controller;
 
 import java.io.IOException;
+
+import es.hol.ecotiffins.ecotiffins.model.WebService;
 
 public interface WebServiceListener {
     /**
