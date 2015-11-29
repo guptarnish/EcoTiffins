@@ -81,15 +81,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 //If user satisfies the conditions, we will move to the next screen
                 //Otherwise set error to TextInputLayout
                 if (editPhone.getText().toString().trim().length() == 10) {
-                    clearValidationError(findViewById(R.id.txtInputLayoutPhone));
-                    if (editAddress.getText().toString().trim().length() > 10) {
-                        clearValidationError(findViewById(R.id.txtInputLayoutAddress));
-                        //Setting up animation to view flipper and moving to the next state
-                        viewFlipper.setInAnimation(this, R.anim.slide_in_from_right);
-                        viewFlipper.setOutAnimation(this, R.anim.slide_out_to_left);
-                        viewFlipper.showNext();
+                    if (!(String.valueOf(editPhone.getText().toString().charAt(0)).equals("7") || String.valueOf(editPhone.getText().toString().charAt(0)).equals("8") || String.valueOf(editPhone.getText().toString().charAt(0)).equals("9"))) {
+                        setValidationError(findViewById(R.id.txtInputLayoutPhone), getResources().getString(R.string.contact_validate));
                     } else {
-                        setValidationError(findViewById(R.id.txtInputLayoutAddress), getResources().getString(R.string.address_empty));
+                        clearValidationError(findViewById(R.id.txtInputLayoutPhone));
+                        if (editAddress.getText().toString().trim().length() > 10) {
+                            clearValidationError(findViewById(R.id.txtInputLayoutAddress));
+                            //Setting up animation to view flipper and moving to the next state
+                            viewFlipper.setInAnimation(this, R.anim.slide_in_from_right);
+                            viewFlipper.setOutAnimation(this, R.anim.slide_out_to_left);
+                            viewFlipper.showNext();
+                        } else {
+                            setValidationError(findViewById(R.id.txtInputLayoutAddress), getResources().getString(R.string.address_empty));
+                        }
                     }
                 } else {
                     setValidationError(findViewById(R.id.txtInputLayoutPhone), getResources().getString(R.string.contact_empty));
@@ -196,6 +200,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 finish();
             } else {
                 generalUtilities.showAlertDialog("Request Cancelled", new JSONObject(response).getString("error_msg"), "OK");
+                startActivity(new Intent(getApplication(), RegisterActivity.class));
+                finish();
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -206,5 +212,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onRequestFailure(IOException e, int api) {
         e.printStackTrace();
         generalUtilities.showAlertDialog("Error", getResources().getString(R.string.request_failure), "OK");
+        startActivity(new Intent(getApplication(), RegisterActivity.class));
+        finish();
     }
 }
