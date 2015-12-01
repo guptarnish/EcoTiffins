@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -44,6 +45,12 @@ public class HomeFragment extends Fragment {
         orders.add(new Order("Monthly Booking", "To get Daily service", 1, 40, R.mipmap.ic_launcher));
         ListView listView = (ListView) rootView.findViewById(R.id.listView);
         listView.setAdapter(new ListViewAdapter(getActivity(), R.layout.layout_listitem, orders));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Call API here
+            }
+        });
     }
 
     private void startSlider() {
