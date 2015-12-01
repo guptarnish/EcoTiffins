@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -29,7 +28,6 @@ public class HomeFragment extends Fragment {
             startSlider();
             populateListView();
         }
-
         return rootView;
     }
 
@@ -55,7 +53,7 @@ public class HomeFragment extends Fragment {
 
     private void startSlider() {
         SliderLayout sliderLayout = (SliderLayout) rootView.findViewById(R.id.slider);
-        HashMap<String,Integer> images = new HashMap<String, Integer>();
+        HashMap<String,Integer> images = new HashMap<>();
         images.put("Hannibal", R.drawable.img_slider);
         images.put("Big Bang Theory", R.drawable.img_slider_one);
         images.put("House of Cards", R.drawable.img_slider_two);
