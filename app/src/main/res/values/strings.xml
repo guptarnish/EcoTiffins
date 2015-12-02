@@ -29,4 +29,21 @@
     <string name="contact_validate">Phone should be start from 7 |8 |9</string>
     <string name="password_empty">Password should be minimum 6 digit</string>
     <string name="password_not_confirm">Password should be similar</string>
+
+    <string name="app_intro">
+		<![CDATA[
+		  <html>
+ 			<head></head>
+ 			<body style="text-align:justify; color:rgb(103,110,111); font-size:10;">
+ 			    <span style="font-size:12px">
+  				Eco Tiffins has been introduced to provide you communication between you and the tiffin center. Eco Tiffins has been introduced to provide you communication between you and the tiffin center.
+  				Eco Tiffins has been introduced to provide you communication between you and the tiffin center. Eco Tiffins has been introduced to provide you communication between you and the tiffin center.
+  				Eco Tiffins has been introduced to provide you communication between you and the tiffin center. Eco Tiffins has been introduced to provide you communication between you and the tiffin center.
+    			<br><br>
+    			Thank you for using Eco Tiffins&#8230;
+    			</span>
+ 			</body>
+		  </html>
+		]]>
+	</string>
 </resources>

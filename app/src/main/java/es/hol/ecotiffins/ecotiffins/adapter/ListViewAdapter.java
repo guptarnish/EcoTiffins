@@ -31,6 +31,7 @@ public class ListViewAdapter extends ArrayAdapter<Order> {
         this.orders = orders;
     }
     
+/*
 	@Override
     public int getCount() {
         return orders.size();
@@ -43,8 +44,9 @@ public class ListViewAdapter extends ArrayAdapter<Order> {
  
     @Override
     public long getItemId(int position) {
-        return position;
+        return 0;
     }
+*/
 
  	@Override
     public View getView(int position, View convertView, ViewGroup parent) {

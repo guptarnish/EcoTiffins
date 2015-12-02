@@ -1,10 +1,9 @@
 package es.hol.ecotiffins.ecotiffins.view;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,9 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import es.hol.ecotiffins.ecotiffins.R;
+import es.hol.ecotiffins.ecotiffins.util.SharedPreferencesUtilities;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
+    private NavigationView navigationView;
     private static final String HOME_FRAGMENT_TAG = "HOME";
     public static final String MAIN_FRAGMENT_STACK = "MAIN";
 
@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().getItem(0).setChecked(true);
+
         loadHomeFragment();
     }
 
@@ -71,22 +71,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Fragment fragment = null;
 
         if (id == R.id.nav_home) {
             getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            uncheckRemainingMenus();
+            navigationView.getMenu().getItem(0).setChecked(true);
         } else if (id == R.id.nav_history) {
-
+            fragment = new HistoryFragment();
+            uncheckRemainingMenus();
+            navigationView.getMenu().getItem(1).setChecked(true);
         } else if (id == R.id.nav_about) {
-
+            fragment = new AboutFragment();
+            uncheckRemainingMenus();
+            navigationView.getMenu().getItem(2).setChecked(true);
         } else if (id == R.id.nav_contact) {
-
+            fragment = new ContactFragment();
+            uncheckRemainingMenus();
+            navigationView.getMenu().getItem(3).setChecked(true);
         } else if (id == R.id.nav_logout) {
+            new SharedPreferencesUtilities(this).flushPreferences();
+            startActivity(new Intent(this, LoginActivity.class));
+            this.finish();
+        }
 
+        if (fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.container, fragment)
+                    .addToBackStack(MAIN_FRAGMENT_STACK)
+                    .commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -95,6 +112,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void loadHomeFragment() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment(), HOME_FRAGMENT_TAG).commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, new HomeFragment(), HOME_FRAGMENT_TAG)
+                .commit();
+    }
+
+    private void uncheckRemainingMenus() {
+        navigationView.getMenu().getItem(0).setChecked(false);
+        navigationView.getMenu().getItem(1).setChecked(false);
+        navigationView.getMenu().getItem(2).setChecked(false);
+        navigationView.getMenu().getItem(3).setChecked(false);
     }
 }

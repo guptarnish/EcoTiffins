@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -44,9 +45,17 @@ public class HomeFragment extends Fragment {
         ListView listView = (ListView) rootView.findViewById(R.id.listView);
         listView.setAdapter(new ListViewAdapter(getActivity(), R.layout.layout_listitem, orders));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Call API here
+                Toast.makeText(getActivity(), "List " + position , Toast.LENGTH_SHORT).show();
+                Bundle bundle = new Bundle();
+                Fragment fragment = new OrderFragment();
+                fragment.setArguments(bundle);
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.container, fragment)
+                        .addToBackStack(MainActivity.MAIN_FRAGMENT_STACK)
+                        .commit();
             }
         });
     }

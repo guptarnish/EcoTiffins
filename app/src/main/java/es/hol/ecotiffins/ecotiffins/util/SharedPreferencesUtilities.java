@@ -82,4 +82,10 @@ public class SharedPreferencesUtilities {
         editor.putString(ADDRESS, address);
         editor.apply();
     }
+
+    public void flushPreferences() {
+        editor = sharedpreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
 }
