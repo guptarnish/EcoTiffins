@@ -63,7 +63,10 @@ public class ListViewAdapter extends ArrayAdapter<Order> {
         }
 
         viewHolder.txtTitle.setText(orders.get(position).getTitle());
-        viewHolder.txtSubTitle.setText(orders.get(position).getSubtitle());
+        viewHolder.txtSubTitle.setText(
+                orders.get(position).getPrice().equals("Price Not Available")
+                        ? orders.get(position).getPrice()
+                        : orders.get(position).getPrice() + " Rs. / Tiffin");
         //viewHolder.txtQuantity.setText(orders.get(position).getQuantity());
         //viewHolder.txtPrice.setText(orders.get(position).getPrice());
         viewHolder.imgIcon.setImageResource(orders.get(position).getImgIcon());

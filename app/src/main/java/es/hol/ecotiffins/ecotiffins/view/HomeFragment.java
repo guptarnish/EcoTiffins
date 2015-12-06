@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -19,13 +18,19 @@ import java.util.HashMap;
 import es.hol.ecotiffins.ecotiffins.R;
 import es.hol.ecotiffins.ecotiffins.adapter.ListViewAdapter;
 import es.hol.ecotiffins.ecotiffins.model.Order;
+import es.hol.ecotiffins.ecotiffins.util.GeneralUtilities;
+import es.hol.ecotiffins.ecotiffins.util.SharedPreferencesUtilities;
 
 public class HomeFragment extends Fragment {
     private View rootView;
+    private GeneralUtilities generalUtilities;
+    private SharedPreferencesUtilities sharedPreferencesUtilities;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_home, container, false);
+            sharedPreferencesUtilities = new SharedPreferencesUtilities(getActivity());
+            generalUtilities = new GeneralUtilities(getActivity());
             startSlider();
             populateListView();
         }
@@ -37,16 +42,20 @@ public class HomeFragment extends Fragment {
         super.onDetach();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
     private void populateListView() {
         ArrayList<Order> orders = new ArrayList<>();
-        orders.add(new Order("Single Pack", "Only 1 tiffin", 1, 50, R.mipmap.ic_launcher));
-        orders.add(new Order("Combo Pack", "You'll get 3 tiffins", 3, 45, R.mipmap.ic_launcher));
-        orders.add(new Order("Monthly Booking", "To get Daily service", 1, 40, R.mipmap.ic_launcher));
+        orders.add(new Order("Single Pack", "Only 1 tiffin", 1, sharedPreferencesUtilities.getSingle(), R.mipmap.ic_launcher));
+        orders.add(new Order("Combo Pack", "You'll get 3 tiffins", 3, sharedPreferencesUtilities.getCombo(), R.mipmap.ic_launcher));
+        orders.add(new Order("Monthly Booking", "To get Daily service", 1, sharedPreferencesUtilities.getMonthly(), R.mipmap.ic_launcher));
         ListView listView = (ListView) rootView.findViewById(R.id.listView);
         listView.setAdapter(new ListViewAdapter(getActivity(), R.layout.layout_listitem, orders));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), "List " + position , Toast.LENGTH_SHORT).show();
                 Bundle bundle = new Bundle();
                 Fragment fragment = new OrderFragment();
                 fragment.setArguments(bundle);
@@ -77,8 +86,7 @@ public class HomeFragment extends Fragment {
 
             //add your extra information
             textSliderView.bundle(new Bundle());
-            textSliderView.getBundle()
-                    .putString("extra",name);
+            textSliderView.getBundle().putString("extra", name);
 
             sliderLayout.addSlider(textSliderView);
         }

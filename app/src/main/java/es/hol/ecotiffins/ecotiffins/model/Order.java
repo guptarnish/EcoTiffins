@@ -6,10 +6,10 @@ public class Order {
     private String title;
     private String subtitle;
     private int quantity;
-    private int price;
+    private String price;
     private int imgIcon;
 
-    public Order(String title, String subtitle, int quantity, int price, int imgIcon) {
+    public Order(String title, String subtitle, int quantity, String price, int imgIcon) {
         this.title = title;
         this.subtitle = subtitle;
         this.quantity = quantity;
@@ -29,7 +29,7 @@ public class Order {
         return quantity;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 

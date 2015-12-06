@@ -1,5 +1,6 @@
 package es.hol.ecotiffins.ecotiffins.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,16 +11,43 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.io.IOException;
+import java.util.HashMap;
 
 import es.hol.ecotiffins.ecotiffins.R;
+import es.hol.ecotiffins.ecotiffins.controller.WebServiceHandler;
+import es.hol.ecotiffins.ecotiffins.controller.WebServiceListener;
+import es.hol.ecotiffins.ecotiffins.model.WebService;
+import es.hol.ecotiffins.ecotiffins.util.GeneralUtilities;
 import es.hol.ecotiffins.ecotiffins.util.SharedPreferencesUtilities;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, WebServiceListener {
     private NavigationView navigationView;
     private static final String HOME_FRAGMENT_TAG = "HOME";
     public static final String MAIN_FRAGMENT_STACK = "MAIN";
+
+    private SharedPreferencesUtilities sharedPreferencesUtilities;
+    private GeneralUtilities generalUtilities;
+    private WebServiceHandler webServiceHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +55,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        webServiceHandler = new WebServiceHandler(this);
+        sharedPreferencesUtilities = new SharedPreferencesUtilities(this);
+        generalUtilities = new GeneralUtilities(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -36,7 +68,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        webServiceHandler.webServiceListener = this;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         loadHomeFragment();
+        webServiceHandler.requestToServer(
+                (getResources().getString(R.string.api_end_point)) + "prices.php",
+                WebService.PRICES,
+                new HashMap<String, String>(),
+                false
+        );
     }
 
     @Override
@@ -65,11 +109,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            webServiceHandler.requestToServer(
+                    (getResources().getString(R.string.api_end_point)) + "offers.php",
+                    WebService.PROMO_CODE,
+                    new HashMap<String, String>(),
+                    true
+            );
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void showPromoCode() {
+        View dialogLayout = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.layout_offer, null);
+        final PopupWindow popupWindow = new PopupWindow(dialogLayout, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT, true);
+        if (!sharedPreferencesUtilities.getDiscount().equals("0")) {
+            ((TextView)dialogLayout.findViewById(R.id.txtDialogMessage)).setText(
+                    "We take lots of care of our customers, use below promo code to grab " +
+                            sharedPreferencesUtilities.getDiscount() + "%" +
+                            " discount."
+            );
+            ((TextView)dialogLayout.findViewById(R.id.txtPromoCode)).setText(sharedPreferencesUtilities.getPromoCode());
+        } else {
+            ((TextView)dialogLayout.findViewById(R.id.txtPromoCode)).setVisibility(View.GONE);
+        }
+
+        dialogLayout.findViewById(R.id.btnDialogOk).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        //Setting up the position of PopUp Window
+        popupWindow.showAtLocation(dialogLayout, Gravity.CENTER, 0, 0);
+    }
+
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -123,5 +198,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().getItem(1).setChecked(false);
         navigationView.getMenu().getItem(2).setChecked(false);
         navigationView.getMenu().getItem(3).setChecked(false);
+    }
+
+    @Override
+    public void onRequestCompleted(String response, int api) {
+        try {
+            Log.e("MainActivity", response);
+            JSONObject jsonObject = new JSONObject(response);
+            if (jsonObject.getString("error").equals("false")) {
+                if (api == WebService.PRICES) {
+                    JSONArray jsonArray = jsonObject.getJSONArray("prices");
+                    sharedPreferencesUtilities.setSingle(jsonArray.getJSONObject(0).getString("price"));
+                    sharedPreferencesUtilities.setCombo(jsonArray.getJSONObject(1).getString("price"));
+                    sharedPreferencesUtilities.setMonthly(jsonArray.getJSONObject(2).getString("price"));
+                } else if (api == WebService.PROMO_CODE) {
+                    JSONArray jsonArray = jsonObject.getJSONArray("offers");
+                    sharedPreferencesUtilities.setPromoCode(jsonArray.getJSONObject(0).getString("promo_code"));
+                    sharedPreferencesUtilities.setDiscount(jsonArray.getJSONObject(0).getString("discount"));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showPromoCode();
+                        }
+                    });
+                }
+            } else {
+                generalUtilities.showAlertDialog("Request Cancelled", "Server error, Please contact to the vendor.", "OK");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onRequestFailure(IOException e, int api) {
+        generalUtilities.showAlertDialog("Error", getResources().getString(R.string.request_failure), "OK");
     }
 }

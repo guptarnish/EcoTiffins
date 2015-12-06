@@ -105,7 +105,7 @@ public class WebServiceHandler {
      * @param api pass the constant of WebService,class
      * @see WebService
      * @see WebServiceListener
-     */
+     *//*
     public void requestToServer(String url, final int api, HashMap<String, String> formData) {
         startProgressBar();
         Request request = new Request.Builder()
@@ -131,7 +131,7 @@ public class WebServiceHandler {
         });
         printRequest(request);
     }
-
+*/
     /**
      * Method will manage form data for all apis and prepare a RequestBody
      * which is needed to call the api

@@ -29,6 +29,13 @@ public class SharedPreferencesUtilities {
     public static final String PHONE = "phone";
     public static final String ADDRESS = "address";
 
+    public static final String SINGLE = "single";
+    public static final String COMBO = "combo";
+    public static final String MONTHLY = "monthly";
+
+    public static final String PROMO_CODE = "promo";
+    public static final String DISCOUNT = "discount";
+
     public SharedPreferencesUtilities(Context context) {
         sharedpreferences = context.getSharedPreferences(context.getResources().getString(R.string.app_name), Context.MODE_PRIVATE);
     }
@@ -80,6 +87,56 @@ public class SharedPreferencesUtilities {
     public void setAddress(String address) {
         editor = sharedpreferences.edit();
         editor.putString(ADDRESS, address);
+        editor.apply();
+    }
+
+    public String getSingle() {
+        return sharedpreferences.getString(SINGLE, "Price Not Available");
+    }
+
+    public void setSingle(String price) {
+        editor = sharedpreferences.edit();
+        editor.putString(SINGLE, price);
+        editor.apply();
+    }
+
+    public String getCombo() {
+        return sharedpreferences.getString(COMBO, "Price Not Available");
+    }
+
+    public void setCombo(String price) {
+        editor = sharedpreferences.edit();
+        editor.putString(COMBO, price);
+        editor.apply();
+    }
+
+    public String getMonthly() {
+        return sharedpreferences.getString(MONTHLY, "Price Not Available");
+    }
+
+    public void setMonthly(String price) {
+        editor = sharedpreferences.edit();
+        editor.putString(MONTHLY, price);
+        editor.apply();
+    }
+
+    public String getPromoCode() {
+        return sharedpreferences.getString(PROMO_CODE, "NO_PROMO");
+    }
+
+    public void setPromoCode(String code) {
+        editor = sharedpreferences.edit();
+        editor.putString(PROMO_CODE, code);
+        editor.apply();
+    }
+
+    public String getDiscount() {
+        return sharedpreferences.getString(DISCOUNT, "0");
+    }
+
+    public void setDiscount(String discount) {
+        editor = sharedpreferences.edit();
+        editor.putString(DISCOUNT, discount);
         editor.apply();
     }
 
