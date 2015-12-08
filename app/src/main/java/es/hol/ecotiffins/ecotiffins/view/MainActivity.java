@@ -2,6 +2,7 @@ package es.hol.ecotiffins.ecotiffins.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
 
         webServiceHandler = new WebServiceHandler(this);

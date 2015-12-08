@@ -4,7 +4,7 @@
     tools:context=".MainActivity">
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_star_white_24dp"
         android:orderInCategory="100"
         app:showAsAction="always" />
 </menu>

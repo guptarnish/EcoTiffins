@@ -27,6 +27,7 @@ public class AboutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_about, container, false);
+            prepareWebViewIntro();
         }
         return rootView;
     }

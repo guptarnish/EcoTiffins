@@ -1,6 +1,7 @@
 package es.hol.ecotiffins.ecotiffins.view;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import java.util.HashMap;
 import es.hol.ecotiffins.ecotiffins.R;
 import es.hol.ecotiffins.ecotiffins.adapter.ListViewAdapter;
 import es.hol.ecotiffins.ecotiffins.model.Order;
+import es.hol.ecotiffins.ecotiffins.model.TiffinPack;
 import es.hol.ecotiffins.ecotiffins.util.GeneralUtilities;
 import es.hol.ecotiffins.ecotiffins.util.SharedPreferencesUtilities;
 
@@ -48,23 +50,29 @@ public class HomeFragment extends Fragment {
     }
 
     private void populateListView() {
-        ArrayList<Order> orders = new ArrayList<>();
-        orders.add(new Order("Single Pack", "Only 1 tiffin", 1, sharedPreferencesUtilities.getSingle(), R.mipmap.ic_launcher));
-        orders.add(new Order("Combo Pack", "You'll get 3 tiffins", 3, sharedPreferencesUtilities.getCombo(), R.mipmap.ic_launcher));
-        orders.add(new Order("Monthly Booking", "To get Daily service", 1, sharedPreferencesUtilities.getMonthly(), R.mipmap.ic_launcher));
+        final ArrayList<Order> orders = new ArrayList<>();
+        orders.add(new Order(TiffinPack.SINGLE, "Only 1 tiffin", 1, sharedPreferencesUtilities.getSingle(), R.drawable.img_single_pack));
+        orders.add(new Order(TiffinPack.COMBO, "You'll get 3 tiffins", 3, sharedPreferencesUtilities.getCombo(), R.drawable.img_combo_pack));
+        orders.add(new Order(TiffinPack.MONTHLY, "To get Daily service", 60, sharedPreferencesUtilities.getMonthly(), R.drawable.img_monthly));
         ListView listView = (ListView) rootView.findViewById(R.id.listView);
         listView.setAdapter(new ListViewAdapter(getActivity(), R.layout.layout_listitem, orders));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Bundle bundle = new Bundle();
-                Fragment fragment = new OrderFragment();
-                fragment.setArguments(bundle);
-                getActivity()
-                        .getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.container, fragment)
-                        .addToBackStack(MainActivity.MAIN_FRAGMENT_STACK)
-                        .commit();
+                if (!orders.get(position).getPrice().equals("Price Not Available")) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("ORDER", orders.get(position));
+                    Fragment fragment = new OrderFragment();
+                    fragment.setArguments(bundle);
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.container, fragment)
+                            .addToBackStack(MainActivity.MAIN_FRAGMENT_STACK)
+                            .commit();
+                } else {
+                    Snackbar.make(view, "Please connect to the internet and restart the app to update rate list.", Snackbar.LENGTH_SHORT).show();
+                }
+
             }
         });
     }
