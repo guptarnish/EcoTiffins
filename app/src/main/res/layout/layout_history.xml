@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:weightSum="10"
-    android:padding="12dp"
-    android:gravity="center_vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="wrap_content">
     <ImageView
-        android:layout_gravity="center"
         android:id="@+id/imgIcon"
-        android:src="@drawable/shape_circle"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:contentDescription="@string/app_name"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:layout_margin="10dp"
+        android:scaleType="centerInside"
+        android:background="@drawable/shape_circle"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_history_black_24dp"/>
     <LinearLayout
-        android:layout_marginLeft="12dp"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@drawable/bottom_border_gray">
         <TextView
             android:id="@+id/txtTitle"
-            android:textSize="20sp"
-            android:text="Only Single Tiffin"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Title Text"
+            android:textSize="20sp"/>
         <TextView
             android:id="@+id/txtSubTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="SubTitle Text"
             android:textSize="15sp"
-            android:text="Free Home Delivery Available"
-            android:textColor="@color/colorGray"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:textColor="@color/colorGray"/>
     </LinearLayout>
 </LinearLayout>
