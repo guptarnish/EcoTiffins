@@ -8,7 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import es.hol.ecotiffins.ecotiffins.R;
 import es.hol.ecotiffins.ecotiffins.model.History;
@@ -36,6 +40,7 @@ public class HistoryAdapter extends ArrayAdapter<History> {
             viewHolder.txtTitle = (TextView) convertView.findViewById(R.id.txtTitle);
             viewHolder.txtSubTitle = (TextView) convertView.findViewById(R.id.txtSubTitle);
             viewHolder.imgIcon = (ImageView) convertView.findViewById(R.id.imgIcon);
+            viewHolder.txtDate = (TextView) convertView.findViewById(R.id.txtDate);
             convertView.setTag(viewHolder);
     	} else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -43,8 +48,9 @@ public class HistoryAdapter extends ArrayAdapter<History> {
 
         viewHolder.txtTitle.setText(histories.get(position).getTitle());
         viewHolder.txtSubTitle.setText(histories.get(position).getSubtitle());
+        viewHolder.txtDate.setText(histories.get(position).getDate());
 
-    	return convertView;
+        return convertView;
     }
 
     private static class ViewHolder {

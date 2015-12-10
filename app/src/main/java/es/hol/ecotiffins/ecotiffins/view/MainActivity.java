@@ -70,7 +70,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
         webServiceHandler.webServiceListener = this;
+
+        //((TextView) navigationView.findViewById(R.id.txtUserName)).setText(sharedPreferencesUtilities.getUser());
+        //((TextView) navigationView.findViewById(R.id.txtEmail)).setText(sharedPreferencesUtilities.getEmail());
     }
 
     @Override

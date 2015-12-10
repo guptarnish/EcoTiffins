@@ -14,14 +14,14 @@
         custom:indicator_visibility="visible"
         custom:pager_animation_span="1100"
         android:layout_height="0dp"
-        android:layout_weight="2"/>
+        android:layout_weight="2.1"/>
     <ListView
         android:id="@+id/listView"
         android:divider="@null"
         android:listSelector="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="1.9"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"/>
 </LinearLayout>

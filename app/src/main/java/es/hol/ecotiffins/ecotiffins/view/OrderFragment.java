@@ -1,7 +1,9 @@
 package es.hol.ecotiffins.ecotiffins.view;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
@@ -85,7 +87,9 @@ public class OrderFragment extends Fragment implements WebServiceListener{
     }
 
     private void setOnClickListener() {
-        rootView.findViewById(R.id.fabOpen).setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fabOrder = (FloatingActionButton) rootView.findViewById(R.id.fabOpen);
+        fabOrder.setColorFilter(Color.WHITE);
+        fabOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 WebServiceHandler webServiceHandler = new WebServiceHandler(getActivity());

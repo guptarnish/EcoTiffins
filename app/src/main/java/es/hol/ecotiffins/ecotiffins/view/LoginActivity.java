@@ -2,6 +2,7 @@ package es.hol.ecotiffins.ecotiffins.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.design.widget.TextInputLayout;
@@ -10,6 +11,7 @@ import android.support.v7.widget.AppCompatEditText;
 import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -64,6 +66,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      * Method will setup all click listeners to UI controls
      */
     private void setOnClickListeners() {
+        ImageView imgBack = (ImageView) findViewById(R.id.imgBack);
+        imgBack.setColorFilter(Color.WHITE);
         findViewById(R.id.btnNext).setOnClickListener(this);
         findViewById(R.id.btnLogin).setOnClickListener(this);
         findViewById(R.id.imgBack).setOnClickListener(this);

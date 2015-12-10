@@ -1,16 +1,11 @@
 package es.hol.ecotiffins.ecotiffins.view;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -18,17 +13,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 import es.hol.ecotiffins.ecotiffins.R;
 import es.hol.ecotiffins.ecotiffins.adapter.HistoryAdapter;
-import es.hol.ecotiffins.ecotiffins.adapter.ListViewAdapter;
 import es.hol.ecotiffins.ecotiffins.controller.WebServiceHandler;
 import es.hol.ecotiffins.ecotiffins.controller.WebServiceListener;
 import es.hol.ecotiffins.ecotiffins.model.History;
-import es.hol.ecotiffins.ecotiffins.model.Order;
-import es.hol.ecotiffins.ecotiffins.model.TiffinPack;
 import es.hol.ecotiffins.ecotiffins.model.WebService;
 import es.hol.ecotiffins.ecotiffins.util.GeneralUtilities;
 import es.hol.ecotiffins.ecotiffins.util.SharedPreferencesUtilities;
@@ -70,17 +66,19 @@ public class HistoryFragment extends Fragment implements WebServiceListener {
     public void onRequestCompleted(String response, int api) {
         try {
             Log.e("History", response);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd HH:MM:SS", Locale.ENGLISH);
             final ArrayList<History> histories = new ArrayList<>();
             final JSONObject jsonObject = new JSONObject(response);
             if (jsonObject.getString("error").equals("false")) {
                 JSONArray jsonArray = jsonObject.getJSONArray("history");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObjectHistory = jsonArray.getJSONObject(i);
+                    Date date = simpleDateFormat.parse(jsonObjectHistory.getString("created"));
                     histories.add(new History(
                             jsonObjectHistory.getString("type") + " Pack",
                             "Order Id : ECO_ORDER_" + jsonObjectHistory.getString("order_id"),
                             jsonObjectHistory.getString("price"),
-                            jsonObjectHistory.getString("created")
+                            new SimpleDateFormat("dd MMM", Locale.ENGLISH).format(date)
                     ));
                 }
                 getActivity().runOnUiThread(new Runnable() {
@@ -93,6 +91,8 @@ public class HistoryFragment extends Fragment implements WebServiceListener {
                 generalUtilities.showAlertDialog("Request Cancelled", jsonObject.getString("error_msg") + ". Please try again..", "OK");
             }
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
     }
