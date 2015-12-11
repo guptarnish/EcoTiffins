@@ -12,5 +12,6 @@
         app:mlpb_enable_circle_background="true"
         app:mlpb_progress_stoke_width="5dp"
         android:layout_width="60dp"
-        android:layout_height="60dp"/>
+        android:layout_height="60dp"
+        android:layout_margin="5dp"/>
 </FrameLayout>

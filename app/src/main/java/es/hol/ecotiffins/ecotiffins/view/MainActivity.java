@@ -4,9 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,18 +19,14 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -41,7 +38,7 @@ import es.hol.ecotiffins.ecotiffins.model.WebService;
 import es.hol.ecotiffins.ecotiffins.util.GeneralUtilities;
 import es.hol.ecotiffins.ecotiffins.util.SharedPreferencesUtilities;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, WebServiceListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, WebServiceListener, FragmentManager.OnBackStackChangedListener {
     private NavigationView navigationView;
     private static final String HOME_FRAGMENT_TAG = "HOME";
     public static final String MAIN_FRAGMENT_STACK = "MAIN";
@@ -68,13 +65,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.getMenu().getItem(0).setChecked(true);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View header = navigationView.inflateHeaderView(R.layout.nav_header_main);
+        TextView txtUserName = (TextView) header.findViewById(R.id.txtUserName);
+        TextView txtEmail = (TextView) header.findViewById(R.id.txtEmail);
+        txtUserName.setText(sharedPreferencesUtilities.getUser());
+        txtEmail.setText(sharedPreferencesUtilities.getEmail());
+        ImageView imageView = (ImageView) header.findViewById(R.id.imageView);
+        imageView.setColorFilter(ContextCompat.getColor(this, R.color.colorPrimaryDark));
 
         webServiceHandler.webServiceListener = this;
-
-        //((TextView) navigationView.findViewById(R.id.txtUserName)).setText(sharedPreferencesUtilities.getUser());
-        //((TextView) navigationView.findViewById(R.id.txtEmail)).setText(sharedPreferencesUtilities.getEmail());
+        getSupportFragmentManager().addOnBackStackChangedListener(this);
     }
 
     @Override
@@ -239,5 +242,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onRequestFailure(IOException e, int api) {
         generalUtilities.showAlertDialog("Error", getResources().getString(R.string.request_failure), "OK");
+    }
+
+    @Override
+    public void onBackStackChanged() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container);
+        if (fragment instanceof HomeFragment) {
+            uncheckRemainingMenus();
+            navigationView.getMenu().getItem(0).setChecked(true);
+        } else if (fragment instanceof HistoryFragment) {
+            uncheckRemainingMenus();
+            navigationView.getMenu().getItem(1).setChecked(true);
+        } else if (fragment instanceof AboutFragment) {
+            uncheckRemainingMenus();
+            navigationView.getMenu().getItem(2).setChecked(true);
+        } else if (fragment instanceof ContactFragment) {
+            uncheckRemainingMenus();
+            navigationView.getMenu().getItem(3).setChecked(true);
+        } else if (fragment instanceof OrderFragment) {
+            uncheckRemainingMenus();
+            navigationView.getMenu().getItem(0).setChecked(true);
+        } else {
+            uncheckRemainingMenus();
+            navigationView.getMenu().getItem(0).setChecked(true);
+        }
     }
 }

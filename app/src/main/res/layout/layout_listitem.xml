@@ -14,7 +14,7 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="5dp">
+        android:layout_marginBottom="10dp">
         <LinearLayout
             android:weightSum="10"
             android:orientation="horizontal"
