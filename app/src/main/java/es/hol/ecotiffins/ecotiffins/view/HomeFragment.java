@@ -34,7 +34,6 @@ public class HomeFragment extends Fragment {
             sharedPreferencesUtilities = new SharedPreferencesUtilities(getActivity());
             generalUtilities = new GeneralUtilities(getActivity());
             startSlider();
-            populateListView();
         }
         return rootView;
     }
@@ -47,6 +46,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        populateListView();
     }
 
     private void populateListView() {
@@ -71,6 +71,7 @@ public class HomeFragment extends Fragment {
                             .commit();
                 } else {
                     Snackbar.make(view, "Please connect to the internet and restart the app to update rate list.", Snackbar.LENGTH_SHORT).show();
+                    populateListView();
                 }
 
             }
@@ -80,10 +81,11 @@ public class HomeFragment extends Fragment {
     private void startSlider() {
         SliderLayout sliderLayout = (SliderLayout) rootView.findViewById(R.id.slider);
         HashMap<String,Integer> images = new HashMap<>();
-        images.put("Hannibal", R.drawable.img_slider);
-        images.put("Big Bang Theory", R.drawable.img_slider_one);
-        images.put("House of Cards", R.drawable.img_slider_two);
-        images.put("Game of Thrones", R.drawable.img_slider_three);
+        images.put("To accomplish your daily need", R.drawable.img_slider);
+        images.put("Special dishes everyday", R.drawable.img_slider_one);
+        images.put("Always different varieties", R.drawable.img_slider_two);
+        images.put("Available with great taste", R.drawable.img_slider_three);
+        images.put("No compromisation with health", R.drawable.img_slider_four);
 
         for(String name : images.keySet()){
             TextSliderView textSliderView = new TextSliderView(getActivity());
