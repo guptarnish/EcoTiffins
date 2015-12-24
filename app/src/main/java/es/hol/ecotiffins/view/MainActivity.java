@@ -1,4 +1,4 @@
-package es.hol.ecotiffins.ecotiffins.view;
+package es.hol.ecotiffins.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -32,11 +32,11 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import es.hol.ecotiffins.ecotiffins.R;
-import es.hol.ecotiffins.ecotiffins.controller.WebServiceHandler;
-import es.hol.ecotiffins.ecotiffins.controller.WebServiceListener;
-import es.hol.ecotiffins.ecotiffins.model.WebService;
-import es.hol.ecotiffins.ecotiffins.util.GeneralUtilities;
-import es.hol.ecotiffins.ecotiffins.util.SharedPreferencesUtilities;
+import es.hol.ecotiffins.controller.WebServiceHandler;
+import es.hol.ecotiffins.controller.WebServiceListener;
+import es.hol.ecotiffins.model.WebService;
+import es.hol.ecotiffins.util.GeneralUtilities;
+import es.hol.ecotiffins.util.SharedPreferencesUtilities;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, WebServiceListener, FragmentManager.OnBackStackChangedListener {
     private NavigationView navigationView;
@@ -78,12 +78,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         webServiceHandler.webServiceListener = this;
         getSupportFragmentManager().addOnBackStackChangedListener(this);
+        loadHomeFragment();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        loadHomeFragment();
         webServiceHandler.requestToServer(
                 (getResources().getString(R.string.api_end_point)) + "prices.php",
                 WebService.PRICES,
@@ -176,6 +176,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragment = new ContactFragment();
             uncheckRemainingMenus();
             navigationView.getMenu().getItem(3).setChecked(true);
+        } else if (id == R.id.nav_share) {
+            Intent i=new Intent(android.content.Intent.ACTION_SEND);
+            i.setType("text/plain");
+            i.putExtra(android.content.Intent.EXTRA_SUBJECT, getResources().getString(R.string.app_name));
+            i.putExtra(android.content.Intent.EXTRA_TEXT, "Hay there! I am using this app to order tiffin. Check out https://play.google.com/store/apps/details?id=es.hol.ecotiffins&hl=en");
+            startActivity(Intent.createChooser(i, "Share via"));
         } else if (id == R.id.nav_logout) {
             new SharedPreferencesUtilities(this).flushPreferences();
             startActivity(new Intent(this, LoginActivity.class));

@@ -1,4 +1,4 @@
-package es.hol.ecotiffins.ecotiffins.controller;
+package es.hol.ecotiffins.controller;
 
 import android.app.Activity;
 import android.content.Context;
@@ -25,7 +25,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import es.hol.ecotiffins.ecotiffins.R;
-import es.hol.ecotiffins.ecotiffins.model.WebService;
+import es.hol.ecotiffins.model.WebService;
 import okio.Buffer;
 
 public class WebServiceHandler {

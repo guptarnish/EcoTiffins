@@ -1,4 +1,4 @@
-package es.hol.ecotiffins.ecotiffins.view;
+package es.hol.ecotiffins.view;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

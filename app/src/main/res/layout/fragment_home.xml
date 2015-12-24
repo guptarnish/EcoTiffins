@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:custom="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:background="@color/windowBackground"
     android:weightSum="4">
     <com.daimajia.slider.library.SliderLayout
         android:id="@+id/slider"

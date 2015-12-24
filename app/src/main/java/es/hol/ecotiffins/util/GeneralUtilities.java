@@ -1,4 +1,4 @@
-package es.hol.ecotiffins.ecotiffins.util;
+package es.hol.ecotiffins.util;
 
 import android.app.Activity;
 import android.content.Context;

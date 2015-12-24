@@ -1,4 +1,4 @@
-package es.hol.ecotiffins.ecotiffins.view;
+package es.hol.ecotiffins.view;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -17,11 +17,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import es.hol.ecotiffins.ecotiffins.R;
-import es.hol.ecotiffins.ecotiffins.adapter.ListViewAdapter;
-import es.hol.ecotiffins.ecotiffins.model.Order;
-import es.hol.ecotiffins.ecotiffins.model.TiffinPack;
-import es.hol.ecotiffins.ecotiffins.util.GeneralUtilities;
-import es.hol.ecotiffins.ecotiffins.util.SharedPreferencesUtilities;
+import es.hol.ecotiffins.adapter.ListViewAdapter;
+import es.hol.ecotiffins.model.Order;
+import es.hol.ecotiffins.model.TiffinPack;
+import es.hol.ecotiffins.util.GeneralUtilities;
+import es.hol.ecotiffins.util.SharedPreferencesUtilities;
 
 public class HomeFragment extends Fragment {
     private View rootView;

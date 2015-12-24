@@ -1,4 +1,4 @@
-package es.hol.ecotiffins.ecotiffins.util;
+package es.hol.ecotiffins.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

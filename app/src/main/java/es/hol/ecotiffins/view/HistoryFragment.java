@@ -1,4 +1,4 @@
-package es.hol.ecotiffins.ecotiffins.view;
+package es.hol.ecotiffins.view;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,13 +21,13 @@ import java.util.HashMap;
 import java.util.Locale;
 
 import es.hol.ecotiffins.ecotiffins.R;
-import es.hol.ecotiffins.ecotiffins.adapter.HistoryAdapter;
-import es.hol.ecotiffins.ecotiffins.controller.WebServiceHandler;
-import es.hol.ecotiffins.ecotiffins.controller.WebServiceListener;
-import es.hol.ecotiffins.ecotiffins.model.History;
-import es.hol.ecotiffins.ecotiffins.model.WebService;
-import es.hol.ecotiffins.ecotiffins.util.GeneralUtilities;
-import es.hol.ecotiffins.ecotiffins.util.SharedPreferencesUtilities;
+import es.hol.ecotiffins.adapter.HistoryAdapter;
+import es.hol.ecotiffins.controller.WebServiceHandler;
+import es.hol.ecotiffins.controller.WebServiceListener;
+import es.hol.ecotiffins.model.History;
+import es.hol.ecotiffins.model.WebService;
+import es.hol.ecotiffins.util.GeneralUtilities;
+import es.hol.ecotiffins.util.SharedPreferencesUtilities;
 
 public class HistoryFragment extends Fragment implements WebServiceListener {
     private View rootView;

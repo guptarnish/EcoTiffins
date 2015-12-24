@@ -1,4 +1,4 @@
-package es.hol.ecotiffins.ecotiffins.view;
+package es.hol.ecotiffins.view;
 
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -12,32 +12,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import es.hol.ecotiffins.ecotiffins.R;
-import es.hol.ecotiffins.ecotiffins.adapter.ListViewAdapter;
-import es.hol.ecotiffins.ecotiffins.controller.WebServiceHandler;
-import es.hol.ecotiffins.ecotiffins.controller.WebServiceListener;
-import es.hol.ecotiffins.ecotiffins.model.Order;
-import es.hol.ecotiffins.ecotiffins.model.TiffinPack;
-import es.hol.ecotiffins.ecotiffins.model.WebService;
-import es.hol.ecotiffins.ecotiffins.util.GeneralUtilities;
-import es.hol.ecotiffins.ecotiffins.util.SharedPreferencesUtilities;
+import es.hol.ecotiffins.controller.WebServiceHandler;
+import es.hol.ecotiffins.controller.WebServiceListener;
+import es.hol.ecotiffins.model.Order;
+import es.hol.ecotiffins.model.TiffinPack;
+import es.hol.ecotiffins.model.WebService;
+import es.hol.ecotiffins.util.GeneralUtilities;
+import es.hol.ecotiffins.util.SharedPreferencesUtilities;
 
 public class OrderFragment extends Fragment implements WebServiceListener{
     private View rootView;

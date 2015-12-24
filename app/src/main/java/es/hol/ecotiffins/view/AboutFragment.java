@@ -1,4 +1,4 @@
-package es.hol.ecotiffins.ecotiffins.view;
+package es.hol.ecotiffins.view;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,19 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.AdapterView;
-import android.widget.ListView;
-
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import es.hol.ecotiffins.ecotiffins.R;
-import es.hol.ecotiffins.ecotiffins.adapter.ListViewAdapter;
-import es.hol.ecotiffins.ecotiffins.model.Order;
 
 public class AboutFragment extends Fragment {
     private View rootView;

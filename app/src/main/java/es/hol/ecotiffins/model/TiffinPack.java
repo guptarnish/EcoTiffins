@@ -1,4 +1,4 @@
-package es.hol.ecotiffins.ecotiffins.model;
+package es.hol.ecotiffins.model;
 
 public final class TiffinPack {
     public static String SINGLE = "Single Pack";

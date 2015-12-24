@@ -1,51 +1,43 @@
-package es.hol.ecotiffins.ecotiffins.model;
+package es.hol.ecotiffins.model;
+
+import android.widget.ImageView;
 
 import java.io.Serializable;
 
-public class History implements Serializable{
+public class Order implements Serializable{
     private String title;
     private String subtitle;
+    private int quantity;
     private String price;
     private int imgIcon;
     private String date;
 
-    public History(String title, String subtitle, String price, String date) {
+    public Order(String title, String subtitle, int quantity, String price, int imgIcon) {
         this.title = title;
         this.subtitle = subtitle;
+        this.quantity = quantity;
         this.price = price;
-        this.date = date;
+        this.imgIcon = imgIcon;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getSubtitle() {
         return subtitle;
     }
 
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
+    public int getQuantity() {
+        return quantity;
     }
 
     public String getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
     public int getImgIcon() {
         return imgIcon;
-    }
-
-    public void setImgIcon(int imgIcon) {
-        this.imgIcon = imgIcon;
     }
 
     public String getDate() {
@@ -58,12 +50,12 @@ public class History implements Serializable{
 
     @Override
     public String toString() {
-        return "History{" +
+        return "Order{" +
                 "title='" + title + '\'' +
                 ", subtitle='" + subtitle + '\'' +
+                ", quantity=" + quantity +
                 ", price='" + price + '\'' +
                 ", imgIcon=" + imgIcon +
-                ", date='" + date + '\'' +
                 '}';
     }
 }
