@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.Log;
@@ -63,13 +64,13 @@ public class OrderFragment extends Fragment implements WebServiceListener{
         TextView txtDescription = (TextView) rootView.findViewById(R.id.txtDescription);
         if (order.getTitle().equals(TiffinPack.SINGLE)) {
             orderId = 1;
-            txtDescription.setText("Please review once before placing an order. Here we are offering a tiffin with free home delivery. Tiffin contains 5 chapatees, two types of dishes, and rice.");
+            txtDescription.setText(getActivity().getResources().getString(R.string.single_pack_contains));
         } else if (order.getTitle().equals(TiffinPack.COMBO)) {
             orderId = 2;
-            txtDescription.setText("Please review once before placing an order. Here we are offering three tiffins with free home delivery. Each tiffin contains 5 chapatees, two types of dishes, and rice.");
+            txtDescription.setText(getActivity().getResources().getString(R.string.combo_pack_contains));
         } else if (order.getTitle().equals(TiffinPack.MONTHLY)) {
             orderId = 3;
-            txtDescription.setText("Please review once before placing an order. Here you are requesting for daily tiffin service. Each Tiffin contains 5 chapatees, two types of dishes, and rice.");
+            txtDescription.setText(getActivity().getResources().getString(R.string.monthly_pack_contains));
         }
 
         generalUtilities = new GeneralUtilities(getActivity());

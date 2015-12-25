@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">"Eco Tiffins"</string>
     <string name="api_end_point">http://ecotiffins.hol.es/apis/</string>
+    <string name="google_map_android_key">AIzaSyDPby3acZ9vwuMCBoDuzepqTkFkXvdsEM8</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -9,12 +10,18 @@
     <string name="history">History</string>
     <string name="about_us">About Us</string>
     <string name="contact">Contact Information</string>
+    <string name="service">Service Areas</string>
     <string name="logout">Logout</string>
     <string name="share">Share</string>
     <string name="help_and_support">Help &amp; Support</string>
 
     <!--Option Menus-->
-    <string name="action_settings">Settings</string>
+    <string name="action_offers">Offer</string>
+
+    <!---->
+    <string name="single_pack_contains">Please review once before placing an order. Here we are offering a tiffin with free home delivery. Tiffin contains 5 Chapatees, Rayta, Curd, Pickle, Salad, Rice &amp; 2 Dishes.</string>
+    <string name="combo_pack_contains">Please review once before placing an order. Here we are offering combo pack of tiffins with free home delivery. Each tiffin contains 5 Chapatees, Rayta, Curd, Pickle, Salad, Rice &amp; 2 Dishes.</string>
+    <string name="monthly_pack_contains">Please review once before placing an order. Here you are requesting for daily tiffin service. Each tiffin contains 5 Chapatees, Rayta, Curd, Pickle, Salad, Rice &amp; 2 Dishes.</string>
 
     <!--System Messages-->
     <string name="error_email">Please provide a valid email address</string>

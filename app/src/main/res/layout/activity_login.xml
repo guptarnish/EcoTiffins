@@ -75,7 +75,7 @@
                             android:layout_gravity="start"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
-                            android:text="Don't have an account?"
+                            android:text="Create an account?"
                             android:textSize="12sp" />
 
                         <Button

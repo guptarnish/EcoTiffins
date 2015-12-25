@@ -58,7 +58,7 @@
                 <TextView
                     android:id="@+id/txtDescription"
                     android:textSize="14sp"
-                    android:text="Please review once before placing an order. Here we are offering a tiffin with free home delivery. Tiffin contains 5 chapatees, two types of dishes, and rice."
+                    android:text="@string/single_pack_contains"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>

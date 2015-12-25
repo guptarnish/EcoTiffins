@@ -12,6 +12,8 @@
                 android:title="@string/about_us" />
             <item android:id="@+id/nav_contact" android:icon="@drawable/ic_perm_contact_calendar_black_24dp"
                 android:title="@string/contact" />
+            <item android:id="@+id/nav_service" android:icon="@drawable/ic_place_black_24dp"
+                android:title="@string/service" />
         </group>
     </item>
     <group android:id="@+id/groupThree">

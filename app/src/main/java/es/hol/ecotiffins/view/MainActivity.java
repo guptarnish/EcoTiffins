@@ -115,9 +115,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_offers) {
             webServiceHandler.requestToServer(
                     (getResources().getString(R.string.api_end_point)) + "offers.php",
                     WebService.PROMO_CODE,
@@ -176,6 +176,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragment = new ContactFragment();
             uncheckRemainingMenus();
             navigationView.getMenu().getItem(3).setChecked(true);
+        } else if (id == R.id.nav_service) {
+            fragment = new ServiceAreasFragment();
+            uncheckRemainingMenus();
+            navigationView.getMenu().getItem(4).setChecked(true);
         } else if (id == R.id.nav_share) {
             Intent i=new Intent(android.content.Intent.ACTION_SEND);
             i.setType("text/plain");
@@ -265,6 +269,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (fragment instanceof ContactFragment) {
             uncheckRemainingMenus();
             navigationView.getMenu().getItem(3).setChecked(true);
+        } else if (fragment instanceof ServiceAreasFragment) {
+            uncheckRemainingMenus();
+            navigationView.getMenu().getItem(4).setChecked(true);
         } else if (fragment instanceof OrderFragment) {
             uncheckRemainingMenus();
             navigationView.getMenu().getItem(0).setChecked(true);

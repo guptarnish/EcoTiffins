@@ -66,19 +66,17 @@ public class HistoryFragment extends Fragment implements WebServiceListener {
     public void onRequestCompleted(String response, int api) {
         try {
             Log.e("History", response);
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd HH:MM:SS", Locale.ENGLISH);
             final ArrayList<History> histories = new ArrayList<>();
             final JSONObject jsonObject = new JSONObject(response);
             if (jsonObject.getString("error").equals("false")) {
                 JSONArray jsonArray = jsonObject.getJSONArray("history");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObjectHistory = jsonArray.getJSONObject(i);
-                    Date date = simpleDateFormat.parse(jsonObjectHistory.getString("created"));
                     histories.add(new History(
                             jsonObjectHistory.getString("type") + " Pack",
                             "Order Id : ECO_ORDER_" + jsonObjectHistory.getString("order_id"),
                             jsonObjectHistory.getString("price"),
-                            new SimpleDateFormat("dd MMM", Locale.ENGLISH).format(date)
+                            jsonObjectHistory.getString("created")
                     ));
                 }
                 getActivity().runOnUiThread(new Runnable() {
@@ -91,8 +89,6 @@ public class HistoryFragment extends Fragment implements WebServiceListener {
                 generalUtilities.showAlertDialog("Request Cancelled", jsonObject.getString("error_msg") + ". Please try again..", "OK");
             }
         } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
             e.printStackTrace();
         }
     }
