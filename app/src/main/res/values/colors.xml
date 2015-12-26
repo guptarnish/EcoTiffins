@@ -6,6 +6,6 @@
     <color name="colorPrimaryLight">#FFCCBC</color>
     <color name="colorAccent">#FF9800</color>
     <color name="windowBackground">#EEEEEE</color>
-
+    <color name="colorPrimaryAlpha">#4bff5722</color>
     <color name="colorGray">#b7b6b6</color>
 </resources>

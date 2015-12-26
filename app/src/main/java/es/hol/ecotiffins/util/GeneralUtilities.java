@@ -107,4 +107,22 @@ public class GeneralUtilities {
             }
         });
     }
+
+    public void showAlertDialog(final String title, final String message, final Context context) {
+        ((Activity) context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new AlertDialog.Builder(
+                        context, R.style.AlertDialogCustom)
+                        .setTitle(title)
+                        .setMessage(message)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ((Activity) context).finish();
+                            }
+                        }).show();
+            }
+        });
+    }
 }

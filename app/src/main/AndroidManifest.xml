@@ -25,6 +25,7 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity android:name="es.hol.ecotiffins.view.RegisterActivity" />
+        <activity android:name="es.hol.ecotiffins.view.ForgetPasswordActivity" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_map_android_key" />

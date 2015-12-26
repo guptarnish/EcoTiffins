@@ -72,6 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.btnLogin).setOnClickListener(this);
         findViewById(R.id.imgBack).setOnClickListener(this);
         findViewById(R.id.txtRegister).setOnClickListener(this);
+        findViewById(R.id.txtForget).setOnClickListener(this);
     }
 
     @Override
@@ -99,10 +100,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     setValidationError(findViewById(R.id.txtInputLayoutPassword), getResources().getString(R.string.error_password_min_lenth));
                 } else {
                     loginUser();
-                    /*startActivity(new Intent(this, MainActivity.class));
-                    this.finish();*/
                 }
-                //logInIfUserExist();
                 break;
             case R.id.imgBack:
                 //Setting up animation to view flipper
@@ -113,6 +111,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.txtRegister:
                 startActivity(new Intent(this, RegisterActivity.class));
+                break;
+            case R.id.txtForget:
+                Intent intent = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
+                intent.putExtra("EMAIL", editEmail.getText().toString());
+                startActivity(intent);
+                break;
         }
     }
 

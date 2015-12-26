@@ -7,4 +7,5 @@ public final class WebService {
     public static final int PRICES = 4;
     public static final int PROMO_CODE = 5;
     public static final int HISTORY = 6;
+    public static final int FORGET_PASSWORD = 7;
 }
