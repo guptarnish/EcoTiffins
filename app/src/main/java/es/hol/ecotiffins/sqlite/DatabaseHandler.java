@@ -35,7 +35,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "CREATE TABLE " + TABLE_HISTORY + "("
                 + KEY_ID		    + " INTEGER PRIMARY KEY AUTOINCREMENT , "
                 + KEY_TYPE  		+ " TEXT , "
-                + KEY_ORDER_ID		+ " TEXT UNIQUE, "
+                + KEY_ORDER_ID		+ " INTEGER UNIQUE, "
                 + KEY_PRICE		    + " TEXT , "
                 + KEY_DATE          + " TEXT ) ";
 
@@ -52,7 +52,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         for(History history : data) {
             ContentValues values = new ContentValues();
             values.put(KEY_TYPE, history.getTitle());
-            values.put(KEY_ORDER_ID, history.getSubtitle());
+            values.put(KEY_ORDER_ID, Integer.parseInt(history.getSubtitle()));
             values.put(KEY_PRICE, history.getPrice());
             values.put(KEY_DATE, history.getDate());
             db.insert(TABLE_HISTORY,null,values);
@@ -63,11 +63,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public ArrayList<History> getHistory(){
         ArrayList<History> histories = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_HISTORY;
+        String query = "SELECT * FROM " + TABLE_HISTORY + " ORDER BY " + KEY_ORDER_ID + " DESC";
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()){
             do {
-                histories.add(new History(cursor.getString(1), cursor.getString(2), cursor.getString(3),cursor.getString(4)));
+                histories.add(new History(cursor.getString(1), String.valueOf(cursor.getInt(2)), cursor.getString(3),cursor.getString(4)));
             } while (cursor.moveToNext());
         }
         cursor.close();

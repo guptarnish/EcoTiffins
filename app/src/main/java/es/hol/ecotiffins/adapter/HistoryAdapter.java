@@ -50,7 +50,7 @@ public class HistoryAdapter extends ArrayAdapter<History> {
         try {
             Date date = simpleDateFormat.parse(histories.get(position).getDate());
             viewHolder.txtTitle.setText(histories.get(position).getTitle());
-            viewHolder.txtSubTitle.setText(histories.get(position).getSubtitle());
+            viewHolder.txtSubTitle.setText("Order Id : ECO_ORDER_" + histories.get(position).getSubtitle());
             viewHolder.txtDate.setText(new SimpleDateFormat("dd MMM", Locale.ENGLISH).format(date));
             viewHolder.txtTime.setText(new SimpleDateFormat("HH:MM a", Locale.ENGLISH).format(date));
         } catch (ParseException e) {

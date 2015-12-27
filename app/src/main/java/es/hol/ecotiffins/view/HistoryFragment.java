@@ -68,7 +68,6 @@ public class HistoryFragment extends Fragment implements WebServiceListener {
     @Override
     public void onRequestCompleted(String response, int api) {
         try {
-            Log.e("History", response);
             final ArrayList<History> histories = new ArrayList<>();
             final JSONObject jsonObject = new JSONObject(response);
             if (jsonObject.getString("error").equals("false")) {
@@ -77,7 +76,7 @@ public class HistoryFragment extends Fragment implements WebServiceListener {
                     JSONObject jsonObjectHistory = jsonArray.getJSONObject(i);
                     histories.add(new History(
                             jsonObjectHistory.getString("type") + " Pack",
-                            "Order Id : ECO_ORDER_" + jsonObjectHistory.getString("order_id"),
+                            jsonObjectHistory.getString("order_id"),
                             jsonObjectHistory.getString("price"),
                             jsonObjectHistory.getString("created")
                     ));
