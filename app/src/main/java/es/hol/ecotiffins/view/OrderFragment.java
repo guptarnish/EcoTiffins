@@ -1,10 +1,13 @@
 package es.hol.ecotiffins.view;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -112,26 +115,41 @@ public class OrderFragment extends Fragment implements WebServiceListener{
         });
     }
 
+    /**
+     *
+     */
     private void setOnClickListener() {
         fabOrder = (FloatingActionButton) rootView.findViewById(R.id.fabOpen);
         fabOrder.setColorFilter(Color.WHITE);
+        fabOrder.setVisibility(View.GONE);
         fabOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WebServiceHandler webServiceHandler = new WebServiceHandler(getActivity());
-                webServiceHandler.webServiceListener = OrderFragment.this;
-                HashMap<String, String> formData = new HashMap<>();
-                formData.put("email", sharedPreferencesUtilities.getEmail());
-                formData.put("address", editAddress.getText().toString());
-                formData.put("quantity", editQty.getText().toString().trim());
-                formData.put("quantity_type", (order.getTitle().equals(TiffinPack.MONTHLY) ? "3" : (order.getTitle().equals(TiffinPack.COMBO) ? "2" : "1")));
-                if (!editPromoCode.getText().toString().trim().equals(""))
-                    formData.put("promo_code", editPromoCode.getText().toString().trim());
+                requestAnOrder();
+            }
+        });
+    }
 
-                if (!editAddress.getText().toString().trim().equals("")) {
-                    if (!editQty.getText().toString().trim().equals("")
-                            && !editQty.getText().toString().trim().equals("0")
-                            && !editQty.getText().toString().trim().equals("1")) {
+    private void requestAnOrder() {
+        WebServiceHandler webServiceHandler = new WebServiceHandler(getActivity());
+        webServiceHandler.webServiceListener = OrderFragment.this;
+        HashMap<String, String> formData = new HashMap<>();
+        formData.put("email", sharedPreferencesUtilities.getEmail());
+        formData.put("address", editAddress.getText().toString());
+        formData.put("quantity", editQty.getText().toString().trim());
+        formData.put("quantity_type", (order.getTitle().equals(TiffinPack.MONTHLY) ? "3" : (order.getTitle().equals(TiffinPack.COMBO) ? "2" : "1")));
+        if (!editPromoCode.getText().toString().trim().equals(""))
+            formData.put("promo_code", editPromoCode.getText().toString().trim());
+
+        /*if(order.getTitle().equals(TiffinPack.COMBO)) {
+
+        } else {
+
+        }*/
+        if (!editAddress.getText().toString().trim().equals("")) {
+            if (!editQty.getText().toString().trim().equals("") && !editQty.getText().toString().trim().equals("0")) {
+                if(order.getTitle().equals(TiffinPack.COMBO)){
+                    if (!editQty.getText().toString().trim().equals("1")) {
                         webServiceHandler.requestToServer(
                                 (getResources().getString(R.string.api_end_point)) + "order.php",
                                 WebService.ORDER,
@@ -139,13 +157,38 @@ public class OrderFragment extends Fragment implements WebServiceListener{
                                 true
                         );
                     } else {
-                        generalUtilities.showAlertDialog("Message","Please enter quantity of tiffins.","OK");
+                        generalUtilities.showAlertDialog("Message","You will have to order more than one tiffin for Combo Pack.","OK");
                     }
+
                 } else {
-                    generalUtilities.showAlertDialog("Message","Please enter a valid address.","OK");
+                    webServiceHandler.requestToServer(
+                            (getResources().getString(R.string.api_end_point)) + "order.php",
+                            WebService.ORDER,
+                            formData,
+                            true
+                    );
                 }
+            } else {
+                generalUtilities.showAlertDialog("Message","Please enter quantity of tiffins.","OK");
             }
-        });
+        } else {
+            setValidationError(rootView.findViewById(R.id.txtInputLayoutAddress), "Please enter a valid address");
+        }
+    }
+
+    /**
+     * Method is useful to apply error message on TextInputLayouts
+     *
+     * @param view         on which error will be shown e.g findViewById(R.id.textInputLayout)
+     * @param errorMessage what you want to display
+     */
+    private void setValidationError(View view, String errorMessage) {
+        //Vibrate device on error
+        ((Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE)).vibrate(50);
+        //Here I am handling typecasting so that there is no need to cast before method is called
+        TextInputLayout textInputLayout = (TextInputLayout) view;
+        textInputLayout.setErrorEnabled(true);
+        textInputLayout.setError(errorMessage);
     }
 
     @Override
@@ -191,17 +234,17 @@ public class OrderFragment extends Fragment implements WebServiceListener{
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.getItem(0).setTitle("ORDER");
+        inflater.inflate(R.menu.order, menu);
+        //super.onCreateOptionsMenu(menu, inflater);
+        menu.getItem(0).setVisible(false);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_offers:
-                Toast.makeText(getActivity(), "Your Order Places", Toast.LENGTH_SHORT).show();
-                Log.e("ORDER", "WORKINGXXXXXXXXXXXXXXXXXXXXXXXXXX");
-                return false;
+            case R.id.action_order:
+                requestAnOrder();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

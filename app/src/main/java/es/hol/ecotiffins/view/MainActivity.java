@@ -124,10 +124,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     new HashMap<String, String>(),
                     true
             );
-            return true;
+            return false;
         }
 
-        return super.onOptionsItemSelected(item);
+        //return super.onOptionsItemSelected(item);
+        return false;
     }
 
     public void showPromoCode() {
