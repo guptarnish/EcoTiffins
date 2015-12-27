@@ -10,9 +10,7 @@
         android:divider="@null"
         android:listSelector="@android:color/transparent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"/>
+        android:layout_height="match_parent"/>
     <TextView
         android:id="@+id/txtEmpty"
         android:textSize="20sp"

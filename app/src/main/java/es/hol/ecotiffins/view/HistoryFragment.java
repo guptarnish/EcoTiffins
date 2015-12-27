@@ -26,17 +26,20 @@ import es.hol.ecotiffins.controller.WebServiceHandler;
 import es.hol.ecotiffins.controller.WebServiceListener;
 import es.hol.ecotiffins.model.History;
 import es.hol.ecotiffins.model.WebService;
+import es.hol.ecotiffins.sqlite.DatabaseHandler;
 import es.hol.ecotiffins.util.GeneralUtilities;
 import es.hol.ecotiffins.util.SharedPreferencesUtilities;
 
 public class HistoryFragment extends Fragment implements WebServiceListener {
     private View rootView;
     private GeneralUtilities generalUtilities;
+    private DatabaseHandler databaseHandler;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_history, container, false);
             generalUtilities = new GeneralUtilities(getActivity());
+            databaseHandler = new DatabaseHandler(getActivity());
             WebServiceHandler webServiceHandler = new WebServiceHandler(getActivity());
             webServiceHandler.webServiceListener = this;
             HashMap<String, String> formData = new HashMap<>();
@@ -79,22 +82,29 @@ public class HistoryFragment extends Fragment implements WebServiceListener {
                             jsonObjectHistory.getString("created")
                     ));
                 }
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        populateListView(histories);
-                    }
-                });
+                databaseHandler.insertData(histories);
             } else {
                 generalUtilities.showAlertDialog("Request Cancelled", jsonObject.getString("error_msg") + ". Please try again..", "OK");
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        } finally {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    populateListView(databaseHandler.getHistory());
+                }
+            });
         }
     }
 
     @Override
     public void onRequestFailure(IOException e, int api) {
-        generalUtilities.showAlertDialog("Error", getResources().getString(R.string.request_failure), "OK");
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                populateListView(databaseHandler.getHistory());
+            }
+        });
     }
 }

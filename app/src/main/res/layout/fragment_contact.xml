@@ -25,7 +25,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/bottom_border_gray">
                 <TextView
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:text="INTRODUCED BY"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
@@ -33,7 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:text="Mr. Vijay Jangir"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -45,7 +45,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/bottom_border_gray">
                 <TextView
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:text="MOBILE"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
@@ -53,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:text="+91 7891550591"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -65,7 +65,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/bottom_border_gray">
                 <TextView
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:text="EMAIL"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
@@ -73,7 +73,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:text="ecotiffins@gmail.com"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp">
                 <TextView
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:text="ADDRESS"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
@@ -92,7 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:text="T1, 3/283, \nChitrakoot Yojna, \nJaipur, \nRajasthan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp">
                 <TextView
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:text="Please feel free to contact us anytime. We will always be happy to help you."
                     android:textColor="@color/colorGray"
                     android:layout_width="match_parent"

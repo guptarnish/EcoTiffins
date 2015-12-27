@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">"Eco Tiffins"</string>
+    <string name="app_name">Eco Tiffins</string>
     <string name="api_end_point">http://ecotiffins.hol.es/apis/</string>
     <string name="google_map_android_key">AIzaSyDPby3acZ9vwuMCBoDuzepqTkFkXvdsEM8</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -46,17 +46,17 @@
  			    <span style="font-size:12px">
   				Now no need to worry about your daily meals because we are just one click away to you.
   				Eco Tiffins has been introduced to provide you delicious food at your location and in affordable charges without compromising on their tests.
-  				Eco Tiffins is well known for testy and healthy food. At the moment, We are providing our services at all your nearest places.
+  				Eco Tiffins is well known for testy and healthy food. At the moment, We are providing our services at some limited areas of Jaipur city.
   				<br><br>
   				The art of cooking food is a passion at Eco Tiffins. We ourselves are great foodies/ food lovers, hence we believe that cooking is mastered through experience
   				along with great interest. Every individual has different tests and through our wide and extensive range of menus we strive to ensure that Eco Tiffins gives our guests the joy
   				of indulging in various gastronomic delights and enjoy value of money.
     			<br><br>
     			App users will get the benefit of App Only Offers. They can get Promo Code for discounts on the ordered tiffins.
-    			To watch your Promo Code, just hit the Star icon in the title bar. And if you get any promo code, order tiffin with Promo code and get
+    			To watch your Promo Code, just hit the <b>OFFER</b> button in the title bar. And if you get any promo code, order tiffin with Promo code and get
     			the discount on every order. So find out what we have to offer & enjoy!
     			<br><br>
-    			Thank you for using Eco Tiffins&#8230;
+    		    <span style="color:rgb(255,87,34);">Thank you for using Eco Tiffins&#8230;</span>
     			</span>
  			</body>
 		  </html>

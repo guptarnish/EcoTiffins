@@ -22,7 +22,8 @@
         <activity
             android:name="es.hol.ecotiffins.view.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity android:name="es.hol.ecotiffins.view.RegisterActivity" />
         <activity android:name="es.hol.ecotiffins.view.ForgetPasswordActivity" />
