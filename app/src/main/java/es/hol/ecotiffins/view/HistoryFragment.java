@@ -2,7 +2,6 @@ package es.hol.ecotiffins.view;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +12,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 
-import es.hol.ecotiffins.ecotiffins.R;
 import es.hol.ecotiffins.adapter.HistoryAdapter;
 import es.hol.ecotiffins.controller.WebServiceHandler;
 import es.hol.ecotiffins.controller.WebServiceListener;
+import es.hol.ecotiffins.ecotiffins.R;
 import es.hol.ecotiffins.model.History;
 import es.hol.ecotiffins.model.WebService;
 import es.hol.ecotiffins.sqlite.DatabaseHandler;

@@ -18,7 +18,7 @@
     <!--Option Menus-->
     <string name="action_offers">Offer</string>
 
-    <!---->
+    <!--Tiffin Pack Information-->
     <string name="single_pack_contains">Please review once before placing an order. Here we are offering a tiffin with free home delivery. Tiffin contains 5 Chapatees, Rayta, Curd, Pickle, Salad, Rice &amp; 2 Dishes.</string>
     <string name="combo_pack_contains">Please review once before placing an order. Here we are offering combo pack of tiffins with free home delivery. Each tiffin contains 5 Chapatees, Rayta, Curd, Pickle, Salad, Rice &amp; 2 Dishes.</string>
     <string name="monthly_pack_contains">Please review once before placing an order. Here you are requesting for daily tiffin service. Each tiffin contains 5 Chapatees, Rayta, Curd, Pickle, Salad, Rice &amp; 2 Dishes.</string>
@@ -29,6 +29,7 @@
     <string name="error_password_min_lenth">Password should be minimum 6 letter.</string>
     <string name="request_failure">Failed to connect to the internet, Please try again</string>
     <string name="internet_error">Please connect to the internet, and give it an antoher shot</string>
+    <string name="order_confirmation">You are going to place an order. Are you sure?</string>
 
     <!--Registration Error Message-->
     <string name="name_empty">Please enter your name.</string>

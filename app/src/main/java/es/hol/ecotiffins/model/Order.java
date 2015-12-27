@@ -1,7 +1,5 @@
 package es.hol.ecotiffins.model;
 
-import android.widget.ImageView;
-
 import java.io.Serializable;
 
 public class Order implements Serializable{

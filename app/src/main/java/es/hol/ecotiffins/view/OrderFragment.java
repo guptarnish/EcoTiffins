@@ -2,7 +2,6 @@ package es.hol.ecotiffins.view;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -10,7 +9,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
@@ -23,7 +21,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,9 +28,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.HashMap;
 
-import es.hol.ecotiffins.ecotiffins.R;
 import es.hol.ecotiffins.controller.WebServiceHandler;
 import es.hol.ecotiffins.controller.WebServiceListener;
+import es.hol.ecotiffins.ecotiffins.R;
 import es.hol.ecotiffins.model.Order;
 import es.hol.ecotiffins.model.TiffinPack;
 import es.hol.ecotiffins.model.WebService;
@@ -243,7 +240,22 @@ public class OrderFragment extends Fragment implements WebServiceListener{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_order:
-                requestAnOrder();
+                new AlertDialog.Builder(
+                        getActivity(), R.style.AlertDialogCustom)
+                        .setTitle("Order Confirmation")
+                        .setMessage(getResources().getString(R.string.order_confirmation))
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                requestAnOrder();
+                            }
+                        })
+                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        }).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

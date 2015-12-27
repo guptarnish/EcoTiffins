@@ -1,21 +1,14 @@
 package es.hol.ecotiffins.view;
 
 import android.content.Context;
-
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.Patterns;
 import android.view.View;
-
-import es.hol.ecotiffins.controller.WebServiceHandler;
-import es.hol.ecotiffins.controller.WebServiceListener;
-import es.hol.ecotiffins.model.WebService;
-import es.hol.ecotiffins.util.GeneralUtilities;
-
 import android.widget.ViewFlipper;
 
 import org.json.JSONException;
@@ -24,7 +17,11 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.HashMap;
 
+import es.hol.ecotiffins.controller.WebServiceHandler;
+import es.hol.ecotiffins.controller.WebServiceListener;
 import es.hol.ecotiffins.ecotiffins.R;
+import es.hol.ecotiffins.model.WebService;
+import es.hol.ecotiffins.util.GeneralUtilities;
 import es.hol.ecotiffins.util.SharedPreferencesUtilities;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, WebServiceListener {

@@ -31,9 +31,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.HashMap;
 
-import es.hol.ecotiffins.ecotiffins.R;
 import es.hol.ecotiffins.controller.WebServiceHandler;
 import es.hol.ecotiffins.controller.WebServiceListener;
+import es.hol.ecotiffins.ecotiffins.R;
 import es.hol.ecotiffins.model.WebService;
 import es.hol.ecotiffins.util.GeneralUtilities;
 import es.hol.ecotiffins.util.SharedPreferencesUtilities;

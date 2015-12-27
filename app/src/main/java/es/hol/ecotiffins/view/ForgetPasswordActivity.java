@@ -1,8 +1,6 @@
 package es.hol.ecotiffins.view;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.design.widget.TextInputLayout;
@@ -11,9 +9,6 @@ import android.support.v7.widget.AppCompatEditText;
 import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.ViewFlipper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +21,6 @@ import es.hol.ecotiffins.controller.WebServiceListener;
 import es.hol.ecotiffins.ecotiffins.R;
 import es.hol.ecotiffins.model.WebService;
 import es.hol.ecotiffins.util.GeneralUtilities;
-import es.hol.ecotiffins.util.SharedPreferencesUtilities;
 
 public class ForgetPasswordActivity extends AppCompatActivity implements View.OnClickListener, WebServiceListener {
     private AppCompatEditText editEmail;

@@ -2,9 +2,6 @@ package es.hol.ecotiffins.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
-
-import java.util.NavigableMap;
 
 import es.hol.ecotiffins.ecotiffins.R;
 

@@ -16,8 +16,8 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import es.hol.ecotiffins.ecotiffins.R;
 import es.hol.ecotiffins.adapter.ListViewAdapter;
+import es.hol.ecotiffins.ecotiffins.R;
 import es.hol.ecotiffins.model.Order;
 import es.hol.ecotiffins.model.TiffinPack;
 import es.hol.ecotiffins.util.GeneralUtilities;
